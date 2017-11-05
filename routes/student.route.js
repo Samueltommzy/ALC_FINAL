@@ -21,6 +21,17 @@ module.exports = (express, socket_io) => {
             userName: request.body.userName,
             password: request.body.password
         };
+        StudentModel.find({ userName: studentObj.userName, available: true }).exec((err, documents) => {
+            if (err) return next(err);
+
+            if (documents && documents.length) {
+                response.status(200).send({
+                    status: 200,
+                    success: false,
+                    message: "The username specified is already taken, Enter another username"
+                });
+                return false;
+            }
         
         const student = new StudentModel(studentObj);
          
@@ -35,6 +46,8 @@ module.exports = (express, socket_io) => {
             });
         });
     });
+});
+
 
     /*
     * Authentication endpoint
