@@ -1,7 +1,7 @@
 "use strict"
 
 module.exports = {
-    database: "mongodb://127.0.0.1:27017/ALC_FINAL",
+    database: "mongodb://Samuel:08189513731@ds161179.mlab.com:61179/samueldb",
     databaseName: "Andela Final",
     secretKey: "aledna"
 }
