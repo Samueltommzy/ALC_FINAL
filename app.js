@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const { database, databaseName } = require('./config/database');
+//const MongoClient = require('mongodb').MongoClient
 const cors = require('cors');
 
 let app = express();
@@ -23,7 +24,7 @@ mongoose.connect(database, function(err) {
     }
 });
 
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
