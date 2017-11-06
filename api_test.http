@@ -1,0 +1,9 @@
+###Test Students authenticate endpoint
+POST http://localhost:3000/api/students/login HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+{
+    "userName": "Samuel"
+    "password" : "abcdef"
+}
+###Test department create endpoint
