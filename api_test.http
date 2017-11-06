@@ -7,3 +7,29 @@ content-type: application/x-www-form-urlencoded
     "password" : "abcdef"
 }
 ###Test department create endpoint
+POST http://localhost:3000/api/departments/create HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+{
+    "departmentName": "Elect/Elect"
+    "departmentCode": EEE
+}
+###Test level create endpoint
+POST http://localhost:3000/api/levels/create HTTP/1.1
+content-type: application/x-www-form-urlencoded
+
+{
+    "levelName": 100
+}
+###Test student create endpoint
+POST http://localhost:3000/api/students/create HTTP/1.1
+content-type: application/x-www-urlencoded
+{
+    _departmentId: ""
+    _levelId:      ""
+    "firsName": "Samuel"
+    "lastName": "Oluwatomi"
+    "matricNumber":EEE/2011/078
+    "email:"email"
+    "userName": "Samuel"
+    "password":"abcdef"
