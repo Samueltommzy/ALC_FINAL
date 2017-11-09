@@ -1,0 +1,25 @@
+{
+  "name": "alc_frontend",
+  "description": "ALC front end developoment project",
+  "main": "alc.app.js",
+  "authors": [
+    "Samuel Ologunowa"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "Andela",
+    "Internship"
+  ],
+  "homepage": "\"https://bitbucket.org/Samueltommzy/alc_frontend#readme\"",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "themify-icons": "^0.1.2"
+  }
+}
