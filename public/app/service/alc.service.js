@@ -8,7 +8,7 @@ angular.module("ALCService", [])
 
         //Authenticate user
         authFactory.authorize_user = function (userObj) {
-            return $http.post(API_BASE_URI + "/users/auth", userObj).then(function (response) {
+            return $http.post(API_BASE_URI + "/students/login", userObj).then(function (response) {
                 if (response.data.authenticationToken) {
                     Sidebar.setSidebar(true);
                     AuthToken.set_token(response.data.authenticationToken, (userObj.remember ? "Long" : "Short"));
@@ -42,7 +42,7 @@ angular.module("ALCService", [])
         let profileFactory = {};
 
         profileFactory.me = function (userObj) {
-            return $http.get(API_BASE_URI + "/users/me", userObj).then(function (response) {
+            return $http.get(API_BASE_URI + "/students", userObj).then(function (response) {
                 return response.data;
             }).catch(function (err) {
                 return err.data;
