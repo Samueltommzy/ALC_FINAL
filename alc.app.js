@@ -12,7 +12,7 @@ alcApp.use("/npm", express.static(__dirname + "/node_modules"));
 alcApp.use("/bower", express.static(__dirname + "/bower_components"));
 
 alcApp.get("*", function (request, response) {
-    response.sendFile(__dirname + "/index.html");
+    response.sendFile(__dirname + "/public/app/views/index.html");
 });
 
 http.listen((process.env.PORT || 3001), function (err) {

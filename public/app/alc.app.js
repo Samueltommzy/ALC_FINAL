@@ -2,7 +2,7 @@
 
 angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loading-bar"])
 
-    .constant("API_BASE_URL", "localhost:3000/api ")
+    .constant("API_BASE_URI", "http://localhost:3000/api")
 
     //.constant("WEBSOCKET", env.WEBSOCKET) //For Socket.IO
 
@@ -12,8 +12,10 @@ angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loadi
         $httpProvider.interceptors.push("AuthInterceptor");
     }])
 
-    .run(["$rootScope", "$filter", "$state", "$transitions", "$window", "Auth", function ($rootScope, $filter, $state, $transitions, $window, Auth){
+    .run(["$rootScope", "$filter", "$state", "$transitions", "$window", function ($rootScope, $filter, $state, $transitions, $window){
         $rootScope.currentDate = new Date();
+
+        console.log($rootScope.currentDate);
 
         //Scrolls page to top after successful transition to the called route
         $transitions.onSuccess({ to: "*" }, function (trans) {
@@ -22,6 +24,7 @@ angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loadi
             }
         });
 
+        /*
         //Verifies if a logged in user is on the login page or signup page
         $transitions.onBefore({ to: function (state) {
             return state.data !== null && state.data.authorization === false && state.data.redirect === true;
@@ -75,6 +78,7 @@ angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loadi
                 return false;
             });
         });
+        */
 
         //Logout function
         $rootScope.destroySession = function () {
