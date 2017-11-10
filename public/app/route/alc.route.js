@@ -8,7 +8,6 @@ angular.module("ALCRoute", ["ui.router"])
         $locationProvider.html5Mode(true);
 
         $stateProvider
-
             .state("index", {
                 url: "/index",
                 templateUrl: "app/views/partials/alc.partial.index.html",
@@ -27,6 +26,22 @@ angular.module("ALCRoute", ["ui.router"])
                 },
                 onEnter: function ($rootScope) {
                     $rootScope.title = "Welcome | ALC Student Application";
+                }
+            })
+            .state("createStudent",{
+                url :"/createStudent",
+                templateUrl: "app/views/partials/alc.partial/create_student.html",
+                controller: "",
+                controllerAs: "",
+                data:{
+                    authorization : true,
+                    redirect: true,
+                    allow:"*"
+                },
+                resolve:{
+                    data:["$rootscope","$q", function($rootscope,$q){
+
+                    }]
                 }
             })
 
