@@ -22,8 +22,7 @@ mongoose.connect(database, function(err) {
         console.log(" Connected to database " + databaseName);
     }
 });
-
-const port = 3000;
+var port = process.env.PORT|| 3000
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
