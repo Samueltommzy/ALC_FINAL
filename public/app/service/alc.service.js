@@ -2,11 +2,11 @@
 
 angular.module("ALCService", [])
 
-    //Authentication Service for making request to the API for authenticating and/or creating a user
+    //Authentication Service for making request to the API for authenticating and/or creating a student
     .factory("Auth", ["$http", "$q", "AuthToken", "API_BASE_URI", function ($http, $q, AuthToken, API_BASE_URI) {
         let authFactory = {};
 
-        //Authenticate user
+        //Authenticate student
         authFactory.authorize_user = function (userObj) {
             return $http.post(API_BASE_URI + "/students/login", userObj).then(function (response) {
                 if (response.data.authenticationToken) {
