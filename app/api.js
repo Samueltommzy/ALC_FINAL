@@ -9,5 +9,6 @@ module.exports = (app, express, socket_io) => {
     api.use(`/departments`, Department);
     api.use(`/levels`, Level);
     api.use(`/courses`, Course);
+    api.use(`/users` , User)
     return api;
 };
