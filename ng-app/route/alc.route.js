@@ -67,7 +67,7 @@ angular.module("ALCRoute", ["ui.router"])
             //Route for viewing all the students registered NOTE: YOU NEED TO CREATE THE STUDENT SERVICE BEFORE INJECTING IT HERE
             .state("dashboard.student", {
                 url: "/student",
-                templateUrl: "../../view/partials/alc.partial.dashboard.student.html",
+                templateUrl: "../../view/createStudent/index.html",
                 controller: "StudentController",
                 controllerAs: "ALCStudent",
                 data: {
