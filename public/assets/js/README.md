@@ -1,0 +1,1 @@
+This folder holds any other external javascript library not included in the node_modules folder and bower_components folder

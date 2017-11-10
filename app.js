@@ -34,10 +34,6 @@ app.use(morgan("dev"));
 let api = require("./app/api")(app, express, socket_io);
 
 app.use("/api", api);
-app.get('/' , function(req,res){
-    res.send("/views/partials/alc.partial.index.html");
-})
-
 http.listen(port, function(err) {
     if (err) {
         console.log(err)
