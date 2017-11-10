@@ -2,7 +2,7 @@
 
 angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loading-bar"])
 
-    .constant("API_BASE_URI", "https://dashboard.heroku.com/apps/studentresource")
+    .constant("API_BASE_URI", "https://studentresource.herokuapp.com")
 
     //.constant("WEBSOCKET", env.WEBSOCKET) //For Socket.IO
 
