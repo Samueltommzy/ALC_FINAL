@@ -6,7 +6,6 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const { database, databaseName } = require('./config/database');
-//const MongoClient = require('mongodb').MongoClient
 const cors = require('cors');
 
 let app = express();
@@ -24,24 +23,30 @@ mongoose.connect(database, function(err) {
     }
 });
 
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-//app.use('/scripts', express.static(`${__dirname }/node_modules`))
 
 let api = require("./app/api")(app, express, socket_io);
 
 app.use("/api", api);
+
+app.use(express.static(__dirname + "/public"));
+app.use("/npm", express.static(__dirname + "/node_modules"));
+app.use("/bower", express.static(__dirname + "/bower_components"));
+
+app.get("*", function (request, response) {
+    response.sendFile(__dirname + "/public/app/views/index.html");
+});
+
 http.listen(port, function(err) {
     if (err) {
         console.log(err)
     } else {
         console.log("app listening on port " + port);
     }
-// <<<<<<< HEAD
-// =======
 });
 
 app.use((err, request, response, next) => {
@@ -53,5 +58,4 @@ app.use((err, request, response, next) => {
         errorCode: err.errorCode
     });
     return false;
-// >>>>>>> 216abc35ea3b50a8adb270c33b38511524f0edc3
 });
