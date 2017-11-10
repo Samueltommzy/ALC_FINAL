@@ -37,6 +37,20 @@ angular.module("ALCService", [])
 
         return authFactory;
     }])
+
+    .factory("Profile", ["$http", "$q", "AuthToken", "API_BASE_URI", function ($http, $q, AuthToken, API_BASE_URI) {
+        let profileFactory = {};
+
+        profileFactory.me = function (userObj) {
+            return $http.get(API_BASE_URI + "/users/me", userObj).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        return profileFactory;
+    }])
     
     //Handles token storing and retrieving
     .factory("AuthToken", ["$window", function ($window) {

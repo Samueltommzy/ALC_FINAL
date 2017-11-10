@@ -2,7 +2,7 @@
 
 angular.module("ALCController", ["ALCService"])
 
-    .controller("AuthController", ["$rootScope", "$scope", "$state", "LxDialogService", "LxNotificationService", "Auth", "data", function ($rootScope, $scope, $state, LxDialogService, LxNotificationService, Auth, data) {
+    .controller("AuthController", ["$rootScope", "$scope", "$state", "Auth", "data", function ($rootScope, $scope, $state, Auth, data) {
         let ALCAuth = this;
         ALCAuth.processing = false;
         ALCAuth.credentials = {};

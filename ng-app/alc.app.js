@@ -2,7 +2,7 @@
 
 angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loading-bar"])
 
-    .constant("API_BASE_URL", "PUT API BASE URL HERE")
+    .constant("API_BASE_URI", "http://localhost:3000/api")
 
     //.constant("WEBSOCKET", env.WEBSOCKET) //For Socket.IO
 

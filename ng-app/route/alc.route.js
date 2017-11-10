@@ -12,7 +12,7 @@ angular.module("ALCRoute", ["ui.router"])
             //Login route and landing page
             .state("index", {
                 url: "/",
-                templateUrl: "../../view/partials/alc.partial.index.html",
+                templateUrl: "../../../view/partials/alc.partial.index.html",
                 controller: "AuthController",
                 controllerAs: "ALCAuth",
                 data: {
@@ -23,6 +23,7 @@ angular.module("ALCRoute", ["ui.router"])
                 resolve: {
                     data: ["$rootScope", "$q", function ($rootScope, $q) {
                         let asyncPromise = [], routeData = {};
+                        console.log("../../../view/partials/alc.partial.index.html");
                         return routeData;
                     }]
                 },
@@ -67,7 +68,7 @@ angular.module("ALCRoute", ["ui.router"])
             //Route for viewing all the students registered NOTE: YOU NEED TO CREATE THE STUDENT SERVICE BEFORE INJECTING IT HERE
             .state("dashboard.student", {
                 url: "/student",
-                templateUrl: "../../view/createStudent/index.html",
+                templateUrl: "../../view/partials/alc.partial.dashboard.student.html",
                 controller: "StudentController",
                 controllerAs: "ALCStudent",
                 data: {
