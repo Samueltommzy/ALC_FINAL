@@ -90,5 +90,5 @@ module.exports = (express, socket_io) => {
     });
 
     
-    return userModel;
+    return userRoute;
 }
