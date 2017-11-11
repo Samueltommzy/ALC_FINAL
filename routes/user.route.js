@@ -9,11 +9,6 @@ module.exports = (express, socket_io) => {
     const userRoute = express.Router();
 
     /*
-    * Authentication middleware
-    */
-    // userRoute.use(authMiddleware);
-
-    /*
     * CREATE user endpoint*
     */
     userRoute.post('/create' , function(request,response,next){
@@ -40,7 +35,7 @@ module.exports = (express, socket_io) => {
     });
 
     /* login  */
-     userRoute.post("/login", (request, response, next) => {
+    userRoute.post("/login", (request, response, next) => {
         const userObj = {
             userName: request.body.userName,
             password: request.body.password
@@ -89,6 +84,19 @@ module.exports = (express, socket_io) => {
         });
     });
 
+    /*
+    * Authentication middleware
+    */
+    userRoute.use(authMiddleware);
+
+    userRoute.get('/me' , function(request,response,next){
+        response.status(200).send({
+            status: 200,
+            success: true,
+            message: "Profile loaded successfully",
+            data: request.user
+        });
+    });
     
     return userRoute;
 }

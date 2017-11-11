@@ -61,6 +61,38 @@ angular.module("ALCRoute", ["ui.router"])
                     }]
                 }
             })
+
+            .state("dashboard.student", {
+                url: "/student",
+                templateUrl: "../../view/partials/alc.partial.dashboard.student.html",
+                controller: "StudentController",
+                controllerAs: "ALCStudent",
+                abstract: true,
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : "*"
+                },
+                resolve: {
+                    data: ["$rootScope", "$q", "Student", function ($rootScope, $q, Student) {
+                        let asyncPromise = [], routeData = {};
+
+                        asyncPromise.push(
+                            Student.retrieve().then(function (response) {
+                                routeData.students = response.data;
+                            }).catch(function (err) {
+                                routeData.students = null;
+                            })
+                        );
+
+                        return $q.all(asyncPromise).then(function (response) {
+                            return routeData;
+                        }).catch(function (err) {
+                            return routeData;
+                        });
+                    }]
+                }
+            })
         ;
 
         $urlRouterProvider.otherwise("/index");

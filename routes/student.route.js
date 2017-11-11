@@ -6,6 +6,11 @@ const { authMiddleware, tokenMiddleware } = require(`../middleware/middleware`);
 
 module.exports = (express, socket_io) => {
     const studentRoute = express.Router();
+
+    /*
+    * Authentication middleware
+    */
+    userRoute.use(authMiddleware);
     
     /*
     * CREATE student endpoint
@@ -48,62 +53,6 @@ module.exports = (express, socket_io) => {
             });
         });
     });
-
-    /*
-    * Authentication endpoint
-    */
-    studentRoute.post("/login", (request, response, next) => {
-        const userObj = {
-            userName: request.body.userName,
-            password: request.body.password
-        };
-        
-        StudentModel.findOne({ userName: userObj.userName, available: true }).exec((err, document) => {
-            if (err) return next(err);
-
-            if (!document) {
-                response.status(200).send({
-                    status: 200,
-                    success: false,
-                    message: "Invalid credentials, please try again"
-                })
-                return false;
-            }
-            
-            document.passwordCheck(userObj.password, (err, isMatch) => {
-                if (err) return next(err);
-
-                if (!isMatch) {
-                    response.status(200).send({
-                        status: 200,
-                        success: false,
-                        message: "Invalid credentials, please try again"
-                    })
-                    return false;
-                }
-
-                const tokenObj = {
-                    _id: document._id,
-                    userName: document.userName,
-                    firstName: document.firstName,
-                    lastName: document.lastName
-                };
-    
-                const token = tokenMiddleware(tokenObj);
-    
-                response.status(200).send({
-                    status: 200,
-                    success: true,
-                    message: `Authentication complete`,
-                    data: _.omit(document.toObject(), 'password'),
-                    authenticationToken: token
-                });
-            });
-        });
-    });
-
-    
-
 
     /*
     * RETRIEVE student endpoint

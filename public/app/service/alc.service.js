@@ -38,11 +38,11 @@ angular.module("ALCService", [])
         return authFactory;
     }])
 
-    .factory("Profile", ["$http", "$q", "AuthToken", "API_BASE_URI", function ($http, $q, AuthToken, API_BASE_URI) {
+    .factory("Profile", ["$http", "$q", "API_BASE_URI", function ($http, $q, API_BASE_URI) {
         let profileFactory = {};
 
         profileFactory.me = function (userObj) {
-            return $http.get(API_BASE_URI + "/users/me", userObj).then(function (response) {
+            return $http.get(API_BASE_URI + "/users/me").then(function (response) {
                 return response.data;
             }).catch(function (err) {
                 return err.data;
@@ -50,6 +50,20 @@ angular.module("ALCService", [])
         };
 
         return profileFactory;
+    }])
+
+    .factory("Student", ["$http", "$q", "API_BASE_URI", function ($http, $q, API_BASE_URI) {
+        let studentFactory = {};
+
+        studentFactory.retrieve = function (userObj) {
+            return $http.get(API_BASE_URI + "/students/retrieve").then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        return studentFactory;
     }])
     
     //Handles token storing and retrieving

@@ -22,11 +22,24 @@ angular.module("ALCController", ["ALCService"])
                 }
 
                 alert(response.message);  //Alert the response from the API
-                $state.go("dashboard.student", null, {reload: true});  //Redirect to the dashboard route
+                if (response.data.userType === 'Admin') $state.go("dashboard.student", null, {reload: true});  //Redirect to the dashboard route
+                if (response.data.userType === 'Student') $state.go("dashboard.profile", null, {reload: true});  //Redirect to the dashboard route
             }).catch(function (err) {
                 ALCAuth.processing = false;
                 alert("Failed to contact Print Control application server, please try again");
             });
         };
+    }])
+
+    .controller("DashboardController", ["$rootScope", "$scope", "$state", "data", function ($rootScope, $scope, $state, data) {
+        let ALCDashboard = this;
+        
+        ALCDashboard.resolvedData = data;
+    }])
+
+    .controller("StudentController", ["$rootScope", "$scope", "$state", "data", function ($rootScope, $scope, $state, data) {
+        let ALCStudent = this;
+        
+        ALCStudent.resolvedData = data;
     }])
 ;
