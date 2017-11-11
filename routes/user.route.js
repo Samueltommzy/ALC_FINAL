@@ -76,7 +76,7 @@ module.exports = (express, socket_io) => {
                 response.status(200).send({
                     status: 200,
                     success: true,
-                    message: `logged in as ${document.userType} `,
+                    message: `logged in as ${ document.userType } `,
                     data: _.omit(document.toObject(), 'password'),
                     authenticationToken: token
                 });

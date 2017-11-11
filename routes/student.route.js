@@ -10,7 +10,7 @@ module.exports = (express, socket_io) => {
     /*
     * Authentication middleware
     */
-    userRoute.use(authMiddleware);
+    studentRoute.use(authMiddleware);
     
     /*
     * CREATE student endpoint
