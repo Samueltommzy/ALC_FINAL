@@ -11,7 +11,7 @@ module.exports = (express, socket_io) => {
     /*
     * Authentication middleware
     */
-    userRoute.use(authMiddleware);
+    // userRoute.use(authMiddleware);
 
     /*
     * CREATE user endpoint*
