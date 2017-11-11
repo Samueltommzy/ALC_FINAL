@@ -28,8 +28,8 @@ angular.module("ALCRoute", ["ui.router"])
                     $rootScope.title = "Welcome | ALC Student Application";
                 }
             })
-            .state("createStudent",{
-                url :"/createStudent",
+            .state("api/students/create",{
+                url :"/api/students/create",
                 templateUrl: "app/views/partials/alc.partial/create_student.html",
                 controller: "",
                 controllerAs: "",
@@ -44,6 +44,10 @@ angular.module("ALCRoute", ["ui.router"])
                     }]
                 }
             })
+            .state("api/courses/create"), {
+                url:"/api/courses/create",
+                templateUrl:"app/views"
+            }
 
             .state("dashboard", {
                 url: "/dashboard",

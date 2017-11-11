@@ -3,10 +3,10 @@
 const _                                   = require(`lodash`);
 const StudentModel                        = require(`../Model/student`);
 const { authMiddleware, tokenMiddleware } = require(`../middleware/middleware`);
-const db                                  = require(`../config/database`)
+
 module.exports = (express, socket_io) => {
     const studentRoute = express.Router();
-
+    
     /*
     * CREATE student endpoint
     */
@@ -18,48 +18,47 @@ module.exports = (express, socket_io) => {
             firstName: request.body.firstName,
             lastName: request.body.lastName,
             email: request.body.email,
+            userName: request.body.userName,
             password: request.body.password
         };
-        StudentModel.find({ matricNumber: studentObj.matricNumber, available: true }).exec((err, documents) => {
+
+        StudentModel.find({ userName: studentObj.userName, available: true }).exec((err, documents) => {
             if (err) return next(err);
 
             if (documents && documents.length) {
                 response.status(200).send({
                     status: 200,
                     success: false,
-                    message: "The matric number specified is already taken, Enter another matric number"
+                    message: "The username specified is already taken, please try again"
                 });
                 return false;
             }
-        
-        const student = new StudentModel(studentObj);
-         
-        student.save((err, document) => {
-            if (err) return next(err);
 
-            response.status(200).send({
-                status: 200,
-                success: true,
-                message: "Student created successfully",
-                data: document
+            const student = new StudentModel(studentObj);
+            
+            student.save((err, document) => {
+                if (err) return next(err);
+    
+                response.status(200).send({
+                    status: 200,
+                    success: true,
+                    message: "Student created successfully",
+                    data: document
+                });
             });
         });
     });
-});
-
 
     /*
     * Authentication endpoint
     */
     studentRoute.post("/login", (request, response, next) => {
         const userObj = {
-            matricNumber: request.body.matricNumber,
+            userName: request.body.userName,
             password: request.body.password
         };
-
-        console.log(userObj);
         
-        StudentModel.findOne({ matricNumber: userObj.matricNumber, available: true }).exec((err, document) => {
+        StudentModel.findOne({ userName: userObj.userName, available: true }).exec((err, document) => {
             if (err) return next(err);
 
             if (!document) {
@@ -70,8 +69,6 @@ module.exports = (express, socket_io) => {
                 })
                 return false;
             }
-
-            console.log(document);
             
             document.passwordCheck(userObj.password, (err, isMatch) => {
                 if (err) return next(err);
@@ -87,7 +84,7 @@ module.exports = (express, socket_io) => {
 
                 const tokenObj = {
                     _id: document._id,
-                    matricNumber: document.matricNumber,
+                    userName: document.userName,
                     firstName: document.firstName,
                     lastName: document.lastName
                 };
@@ -105,10 +102,7 @@ module.exports = (express, socket_io) => {
         });
     });
 
-    /*
-    * Authentication middleware
-    */
-    studentRoute.use(authMiddleware);
+    
 
 
     /*

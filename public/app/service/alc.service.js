@@ -2,13 +2,13 @@
 
 angular.module("ALCService", [])
 
-    //Authentication Service for making request to the API for authenticating and/or creating a student
+    //Authentication Service for making request to the API for authenticating and/or creating a user
     .factory("Auth", ["$http", "$q", "AuthToken", "API_BASE_URI", function ($http, $q, AuthToken, API_BASE_URI) {
         let authFactory = {};
 
-        //Authenticate student
+        //Authenticate user
         authFactory.authorize_user = function (userObj) {
-            return $http.post(API_BASE_URI + "/students/login", userObj).then(function (response) {
+            return $http.post(API_BASE_URI + "/users/login", userObj).then(function (response) {
                 if (response.data.authenticationToken) {
                     Sidebar.setSidebar(true);
                     AuthToken.set_token(response.data.authenticationToken, (userObj.remember ? "Long" : "Short"));
@@ -42,7 +42,7 @@ angular.module("ALCService", [])
         let profileFactory = {};
 
         profileFactory.me = function (userObj) {
-            return $http.get(API_BASE_URI + "/students", userObj).then(function (response) {
+            return $http.get(API_BASE_URI + "/users/me", userObj).then(function (response) {
                 return response.data;
             }).catch(function (err) {
                 return err.data;
