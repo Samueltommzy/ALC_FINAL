@@ -10,7 +10,6 @@ angular.module("ALCService", [])
         authFactory.authorize_user = function (userObj) {
             return $http.post(API_BASE_URI + "/users/login", userObj).then(function (response) {
                 if (response.data.authenticationToken) {
-                    Sidebar.setSidebar(true);
                     AuthToken.set_token(response.data.authenticationToken, (userObj.remember ? "Long" : "Short"));
                 }
                 return response.data;

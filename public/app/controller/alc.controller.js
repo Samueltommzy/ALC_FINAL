@@ -20,6 +20,7 @@ angular.module("ALCController", ["ALCService"])
                     alert(response.message);  //Alert the response from the API
                     return false;
                 }
+                console.log(response);
 
                 alert(response.message);  //Alert the response from the API
                 if (response.data.userType === 'Admin') $state.go("dashboard.student", null, {reload: true});  //Redirect to the dashboard route
