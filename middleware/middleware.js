@@ -2,7 +2,7 @@
 
 const jsonwebtoken  = require('jsonwebtoken');
 const { secretKey } = require('../config/database');
-const StudentModel  = require('../Model/student');
+const UserModel  = require('../Model/user');
 
 const __token_middleware = (userObj, duration = 86400) => {
     return jsonwebtoken.sign(userObj, secretKey, { expiresIn: duration });
@@ -23,22 +23,19 @@ const __auth_middleware = (request, response, next) => {
     jsonwebtoken.verify(token, secretKey, (err, decoded) => {
         if (err) return next(err);
 
-        StudentModel.findOne({ _id: decoded._id }).populate({
-            path: "_departmentId _levelId",
-            match: { available: true }
-        }).exec((err, document) => {
+        UserModel.findOne({ _id: decoded._id, available: true }).exec((err, document) => {
             if (err) return next(err);
 
             if (!document) {
                 response.status(200).send({
                     status: 403,
                     success: false,
-                    message: "Invalid student token found"
+                    message: "Invalid user token found"
                 });
                 return false;
             }
 
-            request.student = document;
+            request.user = document;
             next();
         });
     });

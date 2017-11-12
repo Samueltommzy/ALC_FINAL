@@ -14,8 +14,7 @@ let studentSchema = new Schema({
     email: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    available: { type: Boolean, default: true },
-    studentId:{type: Schema.ObjectId, required: true,ref: "User"}
+    available: { type: Boolean, default: true }
 });
 
 module.exports = mongoose.model("Student", studentSchema);

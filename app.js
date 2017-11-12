@@ -16,13 +16,11 @@ let socket_io = require('socket.io')(http);
 app.use(cors());
 
 mongoose.connect(database, function(err) {
-    if (err) {
-        console.log("connection to database failed");
-    } else {
-        console.log(" Connected to database " + databaseName);
-    }
+    if (err) console.log("connection to database failed");
+    else console.log(" Connected to database " + databaseName);
 });
-var port = process.env.PORT|| 3000
+
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -41,11 +39,8 @@ app.get("*", function (request, response) {
 });
 
 http.listen(port, function(err) {
-    if (err) {
-        console.log(err)
-    } else {
-        console.log("app listening on port " + port);
-    }
+    if (err) console.log(err)
+    else console.log("app listening on port " + port);
 });
 
 app.use((err, request, response, next) => {

@@ -1,6 +1,6 @@
 {
   "name": "alc_frontend",
-  "description": "ALC front end developoment project",
+  "description": "ALC front end ",
   "main": "alc.app.js",
   "authors": [
     "Samuel Ologunowa"
@@ -10,7 +10,7 @@
     "Andela",
     "Internship"
   ],
-  "homepage": "\"https://bitbucket.org/Samueltommzy/alc_frontend#readme\"",
+  "homepage": "\"https://github.com/samueltommzy/ALC_FINAL#readme\"",
   "private": true,
   "ignore": [
     "**/.*",

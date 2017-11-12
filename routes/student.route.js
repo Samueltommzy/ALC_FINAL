@@ -2,6 +2,7 @@
 
 const _                                   = require(`lodash`);
 const StudentModel                        = require(`../Model/student`);
+const UserModel                        = require(`../Model/user`);
 const { authMiddleware, tokenMiddleware } = require(`../middleware/middleware`);
 
 module.exports = (express, socket_io) => {
@@ -16,6 +17,34 @@ module.exports = (express, socket_io) => {
     * CREATE student endpoint
     */
     studentRoute.post("/create", (request, response, next) => {
+        let userObj = {
+            userName : request.body.matricNumber,
+            password: request.body.matricNumber,
+            userType: "Student"
+        };
+
+        userModel.find({ userName: userObj.userName, userType: userObj.userType, available: true }).exec((err, documents) => {
+            if(err) return next(err);
+
+            if (documents.length) {
+                response.status(200).send({
+                    status: 200,
+                    success: false,
+                    message: "User already exists",
+                    data: document
+                });
+                return false;
+            }
+
+            let user = new userModel(userObj);
+            
+            user.save((err, document) => {
+                if (err) return next(err);
+    
+                next();
+            });
+        });
+    }, (request, response, next) => {
         const studentObj = {
             _departmentId: request.body._departmentId,
             _levelId: request.body._levelId,

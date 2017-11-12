@@ -64,6 +64,34 @@ angular.module("ALCService", [])
 
         return studentFactory;
     }])
+
+    .factory("Department", ["$http", "$q", "API_BASE_URI", function ($http, $q, API_BASE_URI) {
+        let departmentFactory = {};
+
+        departmentFactory.retrieve = function (userObj) {
+            return $http.get(API_BASE_URI + "/departments/retrieve").then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        return departmentFactory;
+    }])
+
+    .factory("Level", ["$http", "$q", "API_BASE_URI", function ($http, $q, API_BASE_URI) {
+        let levelFactory = {};
+
+        levelFactory.retrieve = function (userObj) {
+            return $http.get(API_BASE_URI + "/levels/retrieve").then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        return levelFactory;
+    }])
     
     //Handles token storing and retrieving
     .factory("AuthToken", ["$window", function ($window) {

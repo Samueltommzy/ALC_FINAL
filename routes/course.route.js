@@ -69,7 +69,11 @@ module.exports = (express, socket_io) => {
             });
         });
     });
- courseRoute.get("/retrieve/department/:_departmentId/level/:_levelId", (request, response, next) => {
+
+    /*
+    * RETRIEVE all courses for a department and level endpoint
+    */
+    courseRoute.get("/retrieve/department/:_departmentId/level/:_levelId", (request, response, next) => {
         const filterObj = {
             _departmentId: request.params._departmentId,
             _levelId: request.params._levelId,
@@ -89,6 +93,7 @@ module.exports = (express, socket_io) => {
             });
         });
     });
+
 
     /*
     * UPDATE course endpoint

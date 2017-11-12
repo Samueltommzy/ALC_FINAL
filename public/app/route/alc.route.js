@@ -65,12 +65,26 @@ angular.module("ALCRoute", ["ui.router"])
             .state("dashboard.student", {
                 url: "/student",
                 templateUrl: "app/views/partials/alc.partial.dashboard.student.html",
-                controller: "StudentController",
-                controllerAs: "ALCStudent",
                 data: {
                     authorization: true,
                     redirect     : true,
-                    allow        : "*"
+                    allow        : ["Admin"]
+                }
+            })
+
+            .state("dashboard.student.list", {
+                url: "/student/list",
+                views: {
+                    "list": {
+                        templateUrl: "app/views/partials/alc.partial.dashboard.student.list.html",
+                        controller: "StudentController",
+                        controllerAs: "ALCStudent"
+                    }
+                },
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
                 },
                 resolve: {
                     data: ["$rootScope", "$q", "Student", function ($rootScope, $q, Student) {
@@ -90,6 +104,54 @@ angular.module("ALCRoute", ["ui.router"])
                             return routeData;
                         });
                     }]
+                },
+                onEnter: function ($rootScope) {
+                    $rootScope.title = "Manage Students | ALC Student Application";
+                }
+            })
+            .state("dashboard.student.create", {
+                url: "/student/list",
+                views: {
+                    "list": {
+                        templateUrl: "app/views/partials/alc.partial.dashboard.student.create.html",
+                        controller: "StudentController",
+                        controllerAs: "ALCStudent"
+                    }
+                },
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
+                },
+                resolve: {
+                    data: ["$rootScope", "$q", "Department", "Level", function ($rootScope, $q, Department, Level) {
+                        let asyncPromise = [], routeData = {};
+
+                        asyncPromise.push(
+                            Department.retrieve().then(function (response) {
+                                routeData.departments = response.data;
+                            }).catch(function (err) {
+                                routeData.departments = null;
+                            })
+                        );
+
+                        asyncPromise.push(
+                            Level.retrieve().then(function (response) {
+                                routeData.levels = response.data;
+                            }).catch(function (err) {
+                                routeData.levels = null;
+                            })
+                        );
+
+                        return $q.all(asyncPromise).then(function (response) {
+                            return routeData;
+                        }).catch(function (err) {
+                            return routeData;
+                        });
+                    }]
+                },
+                onEnter: function ($rootScope) {
+                    $rootScope.title = "Enroll Student | ALC Student Application";
                 }
             })
         ;

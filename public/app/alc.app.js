@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loading-bar"])
+angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "ui.bootstrap", "angular-loading-bar"])
 
     .constant("API_BASE_URI", "https://studentresource.herokuapp.com/api")
 
@@ -24,7 +24,6 @@ angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loadi
             }
         });
 
-        /*
         //Verifies if a logged in user is on the login page or signup page
         $transitions.onBefore({ to: function (state) {
             return state.data !== null && state.data.authorization === false && state.data.redirect === true;
@@ -39,10 +38,10 @@ angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loadi
                         Auth.clear_token();
                         $state.transitionTo("offline");
                     } else {
-                        if (_.indexOf(["Secretary", "Designer"], response.data.accountType) > -1)
-                            $state.transitionTo("dashboard.job");
+                        if (response.data.userType === "Admin")
+                            $state.transitionTo("dashboard.student.list");
                         else
-                            $state.transitionTo("dashboard.report.filter");
+                            $state.transitionTo("dashboard.profile");
                     }
                     return false;
                 }).catch(function (err) {
@@ -64,21 +63,7 @@ angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "angular-loadi
                 $state.transitionTo("index");
                 return false;
             }
-
-            Profile.me().then(function (response) {
-                if (!response.data) {
-                    Auth.clear_token();
-                    $state.transitionTo("offline");
-                } else {
-                    $rootScope.me = response.data;
-                }
-                return false;
-            }).catch(function (err) {
-                $state.transitionTo("offline");
-                return false;
-            });
         });
-        */
 
         //Logout function
         $rootScope.destroySession = function () {

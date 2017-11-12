@@ -1,0 +1,37 @@
+<div class=container>
+    <h1>
+        List of Enrolled Students
+        <a ui-sref="dashboard.student.create">Enroll a Student</a>
+    </h1>
+
+    <hr/>
+
+    <table class="table table-responsive table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>N<u>o</u>.</th>
+                <th>Full Name</th>
+                <th>Matric Number</th>
+                <th>Department</th>
+                <th>Level</th>
+                <th>Email Address</th>
+                <th>Date Enrolled</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in ALCStudent.resolvedData.students">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ student.firstName }}, {{ student.lastName }}</td>
+                <td>{{ student.matricNumber }}</td>
+                <td>{{ student._departmentId.departmentName }}</td>
+                <td>{{ student._levelId.levelName }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.createdAt | date: 'EEE, MMM. dd, yyyy' }}</td>
+            </tr>
+            <tr ng-if="!ALCStudent.resolvedData.students.length">
+                <td colspan="7" class="text-center">No Student Records Found</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

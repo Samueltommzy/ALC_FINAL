@@ -12,22 +12,34 @@ module.exports = (express, socket_io) => {
     * CREATE user endpoint*
     */
     userRoute.post('/create' , function(request,response,next){
-        const userObj = {
+        let userObj = {
             userName : request.body.userName,
             password: request.body.password,
             userType: request.body.userType
         };
 
-        userModel.find({ userName: userObj.userName,userType: userObj.userType, available: true }).exec((err, documents) =>{
+        userModel.find({ userName: userObj.userName, userType: userObj.userType, available: true }).exec((err, documents) => {
             if(err) return next(err);
-            const user = new userModel(userObj);
+
+            if (documents.length) {
+                response.status(200).send({
+                    status: 200,
+                    success: false,
+                    message: "User already exists",
+                    data: document
+                });
+                return false;
+            }
+
+            let user = new userModel(userObj);
+            
             user.save((err, document) => {
                 if (err) return next(err);
     
                 response.status(200).send({
                     status: 200,
                     success: true,
-                    message: "user created successfully",
+                    message: "User created successfully",
                     data: document
                 });
             });
