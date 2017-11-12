@@ -67,7 +67,6 @@ angular.module("ALCRoute", ["ui.router"])
                 templateUrl: "../../view/partials/alc.partial.dashboard.student.html",
                 controller: "StudentController",
                 controllerAs: "ALCStudent",
-                abstract: true,
                 data: {
                     authorization: true,
                     redirect     : true,

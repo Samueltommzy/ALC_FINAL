@@ -72,17 +72,17 @@ angular.module("ALCService", [])
         //Sets the token to localstorage or sessionstorage
         authTokenFactory.set_token = function (token, period) {
             if (token) {
-                if (period === "Long") $window.localStorage.setItem("PrintControlAuthToken", token);
-                else $window.sessionStorage.setItem("PrintControlAuthToken", token);
+                if (period === "Long") $window.localStorage.setItem("ALCAuthToken", token);
+                else $window.sessionStorage.setItem("ALCAuthToken", token);
             } else {
-                $window.localStorage.removeItem("PrintControlAuthToken");
-                $window.sessionStorage.removeItem("PrintControlAuthToken");
+                $window.localStorage.removeItem("ALCAuthToken");
+                $window.sessionStorage.removeItem("ALCAuthToken");
             }
         };
 
         //Gets the token from localstorage or sessionstorage
         authTokenFactory.get_token = function () {
-            return ($window.localStorage.getItem("PrintControlAuthToken") || $window.sessionStorage.getItem("PrintControlAuthToken"));
+            return ($window.localStorage.getItem("ALCAuthToken") || $window.sessionStorage.getItem("ALCAuthToken"));
         };
 
         return authTokenFactory;
@@ -94,9 +94,9 @@ angular.module("ALCService", [])
         //Injects token data into API requests
         authInterceptorFactory.request = function (config) {
 
-            let PrintControlToken = AuthToken.get_token();
+            let ALCToken = AuthToken.get_token();
 
-            if (PrintControlToken) config.headers["x-access-token"] = PrintControlToken;
+            if (ALCToken) config.headers["x-access-token"] = ALCToken;
 
             return config;
         };
