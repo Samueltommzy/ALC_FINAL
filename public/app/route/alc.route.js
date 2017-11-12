@@ -32,7 +32,7 @@ angular.module("ALCRoute", ["ui.router"])
 
             .state("dashboard", {
                 url: "/dashboard",
-                templateUrl: "../../view/partials/alc.partial.dashboard.html",
+                templateUrl: "app/views/partials/alc.partial.dashboard.html",
                 controller: "DashboardController",
                 controllerAs: "ALCDashboard",
                 abstract: true,
@@ -64,7 +64,7 @@ angular.module("ALCRoute", ["ui.router"])
 
             .state("dashboard.student", {
                 url: "/student",
-                templateUrl: "../../view/partials/alc.partial.dashboard.student.html",
+                templateUrl: "app/views/partials/alc.partial.dashboard.student.html",
                 controller: "StudentController",
                 controllerAs: "ALCStudent",
                 data: {
