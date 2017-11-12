@@ -1,2 +1,6 @@
-<h1>Student List Here</h1>
+<!--<div ng-controller="StudentController">-->
+    <h2> Student List</h2>
+    <ul>
+<li ng-repeat = "students in ALCStudent.resolvedData.students"><a href="https://studentresource.herokuapp.com/dashboard/student">Student Data : {{students.prop}}</a>
+</li></ul>
 <h2>Current Student Count - {{ ALCStudent.resolvedData.students.length }}</h2>
