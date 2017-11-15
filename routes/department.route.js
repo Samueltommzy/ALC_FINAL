@@ -8,6 +8,11 @@ module.exports = (express, socket_io) => {
     const departmentRoute = express.Router();
 
     /*
+    * Authentication middleware
+    */
+    departmentRoute.use(authMiddleware);
+
+    /*
     * CREATE department endpoint
     */
     departmentRoute.post("/create", (request, response, next) => {

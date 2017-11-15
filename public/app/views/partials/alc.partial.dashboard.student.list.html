@@ -16,6 +16,7 @@
                 <th>Level</th>
                 <th>Email Address</th>
                 <th>Date Enrolled</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -27,9 +28,12 @@
                 <td>{{ student._levelId.levelName }}</td>
                 <td>{{ student.email }}</td>
                 <td>{{ student.createdAt | date: 'EEE, MMM. dd, yyyy' }}</td>
+                <td>
+                    <button ng-click="ALCStudent.deleteStudent(student, $index)">Delete</button>
+                </td>
             </tr>
             <tr ng-if="!ALCStudent.resolvedData.students.length">
-                <td colspan="7" class="text-center">No Student Records Found</td>
+                <td colspan="8" class="text-center">No Student Records Found</td>
             </tr>
         </tbody>
     </table>

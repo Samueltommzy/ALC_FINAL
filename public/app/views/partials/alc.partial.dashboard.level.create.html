@@ -5,7 +5,16 @@
 
     <hr/>
 
-    <form ng-submit="ALCLevel.createLevel()">
-        Put your create level form here
-    </form>
+    <div class="login-form">
+        <form ng-submit="ALCLevel.createLevel()">
+            <div class="group">
+                <label class="label">Level Name</label>
+                <input type="text" name="levelName" ng-model="ALCLevel.newLevel.levelName" class="input" required />
+            </div>
+    
+            <div class="group">
+                <input type="submit" class="button" value="Create">
+            </div>
+        </form>
+    </div>
 </div>

@@ -62,6 +62,30 @@ angular.module("ALCService", [])
             });
         };
 
+        studentFactory.create = function (studentObj) {
+            return $http.post(API_BASE_URI + "/students/create", studentObj).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        studentFactory.update = function (studentObj) {
+            return $http.put(API_BASE_URI + "/students/update/" + studentObj._id, studentObj).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        studentFactory.delete = function (studentObj) {
+            return $http.delete(API_BASE_URI + "/students/delete/" + studentObj._id).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
         return studentFactory;
     }])
 
@@ -76,6 +100,30 @@ angular.module("ALCService", [])
             });
         };
 
+        departmentFactory.create = function (departmentObj) {
+            return $http.post(API_BASE_URI + "/departments/create", departmentObj).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        departmentFactory.update = function (departmentObj) {
+            return $http.put(API_BASE_URI + "/departments/update/" + departmentObj._id, departmentObj).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        departmentFactory.delete = function (departmentObj) {
+            return $http.delete(API_BASE_URI + "/departments/delete/" + departmentObj._id).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
         return departmentFactory;
     }])
 
@@ -84,6 +132,31 @@ angular.module("ALCService", [])
 
         levelFactory.retrieve = function (userObj) {
             return $http.get(API_BASE_URI + "/levels/retrieve").then(function (response) {
+                console.log(response);
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        levelFactory.create = function (levelObj) {
+            return $http.post(API_BASE_URI + "/levels/create", levelObj).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        levelFactory.update = function (levelObj) {
+            return $http.put(API_BASE_URI + "/levels/update/" + levelObj._id, levelObj).then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        levelFactory.delete = function (levelObj) {
+            return $http.delete(API_BASE_URI + "/levels/delete/" + levelObj._id).then(function (response) {
                 return response.data;
             }).catch(function (err) {
                 return err.data;
@@ -91,6 +164,20 @@ angular.module("ALCService", [])
         };
 
         return levelFactory;
+    }])
+
+    .factory("Course", ["$http", "$q", "API_BASE_URI", function ($http, $q, API_BASE_URI) {
+        let courseFactory = {};
+
+        courseFactory.retrieve = function (userObj) {
+            return $http.get(API_BASE_URI + "/courses/retrieve").then(function (response) {
+                return response.data;
+            }).catch(function (err) {
+                return err.data;
+            });
+        };
+
+        return courseFactory;
     }])
     
     //Handles token storing and retrieving

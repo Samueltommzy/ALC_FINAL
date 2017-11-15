@@ -23,7 +23,7 @@ module.exports = (express, socket_io) => {
             userType: "Student"
         };
 
-        userModel.find({ userName: userObj.userName, userType: userObj.userType, available: true }).exec((err, documents) => {
+        UserModel.find({ userName: userObj.userName, userType: userObj.userType, available: true }).exec((err, documents) => {
             if(err) return next(err);
 
             if (documents.length) {
@@ -36,34 +36,34 @@ module.exports = (express, socket_io) => {
                 return false;
             }
 
-            let user = new userModel(userObj);
+            let user = new UserModel(userObj);
             
             user.save((err, document) => {
                 if (err) return next(err);
     
+                request.body._userId = document._id;
                 next();
             });
         });
     }, (request, response, next) => {
         const studentObj = {
+            _userId: request.body._userId,
             _departmentId: request.body._departmentId,
             _levelId: request.body._levelId,
             matricNumber: request.body.matricNumber,
             firstName: request.body.firstName,
             lastName: request.body.lastName,
-            email: request.body.email,
-            userName: request.body.userName,
-            password: request.body.password
+            email: request.body.email
         };
 
-        StudentModel.find({ userName: studentObj.userName, available: true }).exec((err, documents) => {
+        StudentModel.find({ email: studentObj.email, available: true }).exec((err, documents) => {
             if (err) return next(err);
 
             if (documents && documents.length) {
                 response.status(200).send({
                     status: 200,
                     success: false,
-                    message: "The username specified is already taken, please try again"
+                    message: "The email specified is already taken, please try again"
                 });
                 return false;
             }

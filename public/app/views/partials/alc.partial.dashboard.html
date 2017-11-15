@@ -23,7 +23,8 @@
                         <li ui-sref-active="active"><a ui-sref="dashboard.student.create">Create Student</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" uib-dropdown="" style="">
+                <!--
+                <li ui-sref-active="{'active': 'dashboard.course.*'}" class="dropdown" uib-dropdown="" style="">
                     <a role="button" class="dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                         Manage Courses <b class="caret"></b>
                     </a>
@@ -32,22 +33,23 @@
                         <li><a href="#alert">Create Course</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" uib-dropdown="" style="">
+                -->
+                <li ui-sref-active="{'active': 'dashboard.level.*'}" class="dropdown" uib-dropdown="" style="">
                     <a role="button" class="dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                         Manage Levels <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#accordion">View Levels</a></li>
-                        <li><a href="#alert">Create Level</a></li>
+                        <li ui-sref-active="active"><a ui-sref="dashboard.level.list">View Levels</a></li>
+                        <li ui-sref-active="active"><a ui-sref="dashboard.level.create">Create Level</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" uib-dropdown="" style="">
+                <li ui-sref-active="{'active': 'dashboard.department.*'}" class="dropdown" uib-dropdown="" style="">
                     <a role="button" class="dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                         Manage Departments <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#accordion">View Departments</a></li>
-                        <li><a href="#alert">Create Department</a></li>
+                        <li ui-sref-active="active"><a ui-sref="dashboard.department.list">View Departments</a></li>
+                        <li ui-sref-active="active"><a ui-sref="dashboard.department.create">Create Department</a></li>
                     </ul>
                 </li>
                 <li><a ng-click="">Logout</a></li>

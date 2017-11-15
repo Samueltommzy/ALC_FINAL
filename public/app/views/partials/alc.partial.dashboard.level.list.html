@@ -12,6 +12,7 @@
                 <th>N<u>o</u>.</th>
                 <th>Level Name</th>
                 <th>Date Created</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -19,9 +20,12 @@
                 <td>{{ $index + 1 }}</td>
                 <td>{{ level.levelName }}</td>
                 <td>{{ level.createdAt | date: 'EEE, MMM. dd, yyyy' }}</td>
+                <td>
+                    <button ng-click="ALCLevel.deleteLevel(level, $index)">Delete</button>
+                </td>
             </tr>
             <tr ng-if="!ALCLevel.resolvedData.levels.length">
-                <td colspan="3" class="text-center">No Levels Found</td>
+                <td colspan="4" class="text-center">No Levels Found</td>
             </tr>
         </tbody>
     </table>
