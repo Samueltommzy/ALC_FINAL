@@ -55,7 +55,6 @@ module.exports = (express, socket_io) => {
             lastName: request.body.lastName,
             email: request.body.email
         };
-
         StudentModel.find({ email: studentObj.email, available: true }).exec((err, documents) => {
             if (err) return next(err);
 
