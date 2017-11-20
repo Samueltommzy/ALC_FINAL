@@ -25,8 +25,7 @@ module.exports = (express, socket_io) => {
                 response.status(200).send({
                     status: 200,
                     success: false,
-                    message: "User already exists",
-                    data: document
+                    message: "User already exists"
                 });
                 return false;
             }
