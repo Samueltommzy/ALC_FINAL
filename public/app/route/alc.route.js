@@ -62,6 +62,8 @@ angular.module("ALCRoute", ["ui.router"])
                 }
             })
 
+            /**/
+
             .state("dashboard.student", {
                 url: "/student",
                 templateUrl: "app/views/partials/alc.partial.dashboard.student.html",
@@ -109,10 +111,11 @@ angular.module("ALCRoute", ["ui.router"])
                     $rootScope.title = "Manage Students | ALC Student Application";
                 }
             })
+
             .state("dashboard.student.create", {
-                url: "/student/list",
+                url: "/student/create",
                 views: {
-                    "list": {
+                    "create": {
                         templateUrl: "app/views/partials/alc.partial.dashboard.student.create.html",
                         controller: "StudentController",
                         controllerAs: "ALCStudent"
@@ -152,6 +155,158 @@ angular.module("ALCRoute", ["ui.router"])
                 },
                 onEnter: function ($rootScope) {
                     $rootScope.title = "Enroll Student | ALC Student Application";
+                }
+            })
+
+            /**/
+
+            .state("dashboard.department", {
+                url: "/department",
+                templateUrl: "app/views/partials/alc.partial.dashboard.department.html",
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
+                }
+            })
+
+            .state("dashboard.department.list", {
+                url: "/department/list",
+                views: {
+                    "list": {
+                        templateUrl: "app/views/partials/alc.partial.dashboard.department.list.html",
+                        controller: "DepartmentController",
+                        controllerAs: "ALCDepartment"
+                    }
+                },
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
+                },
+                resolve: {
+                    data: ["$rootScope", "$q", "Department", function ($rootScope, $q, Department) {
+                        let asyncPromise = [], routeData = {};
+
+                        asyncPromise.push(
+                            Department.retrieve().then(function (response) {
+                                routeData.departments = response.data;
+                            }).catch(function (err) {
+                                routeData.departments = null;
+                            })
+                        );
+
+                        return $q.all(asyncPromise).then(function (response) {
+                            return routeData;
+                        }).catch(function (err) {
+                            return routeData;
+                        });
+                    }]
+                },
+                onEnter: function ($rootScope) {
+                    $rootScope.title = "Manage Departments | ALC Student Application";
+                }
+            })
+            
+            .state("dashboard.department.create", {
+                url: "/department/create",
+                views: {
+                    "create": {
+                        templateUrl: "app/views/partials/alc.partial.dashboard.department.create.html",
+                        controller: "DepartmentController",
+                        controllerAs: "ALCDepartment"
+                    }
+                },
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
+                },
+                resolve: {
+                    data: ["$rootScope", "$q", function ($rootScope, $q) {
+                        let asyncPromise = [], routeData = {};
+
+                        return true;
+                    }]
+                },
+                onEnter: function ($rootScope) {
+                    $rootScope.title = "Add a Department | ALC Student Application";
+                }
+            })
+
+            /**/
+
+            .state("dashboard.level", {
+                url: "/level",
+                templateUrl: "app/views/partials/alc.partial.dashboard.level.html",
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
+                }
+            })
+
+            .state("dashboard.level.list", {
+                url: "/level/list",
+                views: {
+                    "list": {
+                        templateUrl: "app/views/partials/alc.partial.dashboard.level.list.html",
+                        controller: "LevelController",
+                        controllerAs: "ALCLevel"
+                    }
+                },
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
+                },
+                resolve: {
+                    data: ["$rootScope", "$q", "Level", function ($rootScope, $q, Level) {
+                        let asyncPromise = [], routeData = {};
+
+                        asyncPromise.push(
+                            Level.retrieve().then(function (response) {
+                                routeData.levels = response.data;
+                            }).catch(function (err) {
+                                routeData.levels = null;
+                            })
+                        );
+
+                        return $q.all(asyncPromise).then(function (response) {
+                            return routeData;
+                        }).catch(function (err) {
+                            return routeData;
+                        });
+                    }]
+                },
+                onEnter: function ($rootScope) {
+                    $rootScope.title = "Manage Levels | ALC Student Application";
+                }
+            })
+            
+            .state("dashboard.level.create", {
+                url: "/level/create",
+                views: {
+                    "create": {
+                        templateUrl: "app/views/partials/alc.partial.dashboard.level.create.html",
+                        controller: "LevelController",
+                        controllerAs: "ALCLevel"
+                    }
+                },
+                data: {
+                    authorization: true,
+                    redirect     : true,
+                    allow        : ["Admin"]
+                },
+                resolve: {
+                    data: ["$rootScope", "$q", function ($rootScope, $q) {
+                        let asyncPromise = [], routeData = {};
+
+                        return true;
+                    }]
+                },
+                onEnter: function ($rootScope) {
+                    $rootScope.title = "Add a Level | ALC Student Application";
                 }
             })
         ;
