@@ -30,8 +30,7 @@ module.exports = (express, socket_io) => {
                 response.status(200).send({
                     status: 200,
                     success: false,
-                    message: "User already exists",
-                    data: document
+                    message: "User already exists"
                 });
                 return false;
             }
@@ -55,8 +54,17 @@ module.exports = (express, socket_io) => {
             lastName: request.body.lastName,
             email: request.body.email
         };
-        StudentModel.find({ email: studentObj.email, available: true }).exec((err, documents) => {
+
+        let searchObj = {
+            $or: [
+                { email: studentObj.email, available: true },
+                { matricNumber: studentObj.matricNumber, available: true }
+            ]
+        };
+
+        StudentModel.find(searchObj).exec((err, documents) => {
             if (err) return next(err);
+            console.log(err);
 
             if (documents && documents.length) {
                 response.status(200).send({
