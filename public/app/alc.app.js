@@ -3,7 +3,7 @@
 angular.module("ALC", ["ALCRoute", "ALCService", "ALCController", "ui.bootstrap", "angular-loading-bar"])
 
     .constant("API_BASE_URI", "https://studentresource.herokuapp.com/api")
-
+     
     //.constant("WEBSOCKET", env.WEBSOCKET) //For Socket.IO
 
     //.constant("DT_OPTS", { scrollY: "45vh", autoWidth: true, scrollCollapse: true, paging: false, searching: false, info: true }) //For Datatables

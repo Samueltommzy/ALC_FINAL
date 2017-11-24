@@ -9,14 +9,14 @@ const { database, databaseName } = require('./config/database');
 const cors = require('cors');
 
 let app = express();
-
+//mongodb://Samuel:08189513731@ds161179.mlab.com:61179/samueldb
 let http = require("http").Server(app);
 let socket_io = require('socket.io')(http);
 
 app.use(cors());
 
 mongoose.connect(database, function(err) {
-    if (err) console.log("connection to database failed");
+    if (err) console.log(err + "\nconnection to database failed");
     else console.log(" Connected to database " + databaseName);
 });
 
