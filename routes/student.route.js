@@ -18,8 +18,8 @@ module.exports = (express, socket_io) => {
     */
     studentRoute.post("/create", (request, response, next) => {
         let userObj = {
-            userName : request.body.userName,
-            password: request.body.password,
+            userName : request.body.matricNumber,
+            password: request.body.matricNumber,
             userType: "Student"
         };
 
