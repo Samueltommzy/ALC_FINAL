@@ -54,7 +54,7 @@ module.exports = (express, socket_io) => {
             lastName: request.body.lastName,
             email: request.body.email
         };
-
+console.log(request.body);
         let searchObj = {
             $or: [
                 { email: studentObj.email, available: true },
