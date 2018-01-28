@@ -14,8 +14,8 @@ if you dont have bower installed on your local machine, run sudo npm install -g 
 finally run npm start in this directory and the app should be up on localhost:3000/
 if there is any process using this port on your system,use this command to get the process id : netstat -punta|grep node and kill the process with: kill -9 PID or open the app.js file and change the port variable
 
-default login username --- samuel
-default login password --- samuel
+default login username --- Tommzy
+default login password --- tommzy
 
 
 
